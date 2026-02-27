@@ -10,7 +10,7 @@ require_once './config.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./assets/styles/main.css">
-  <title>Titel</title>
+  <title>m307</title>
 </head>
 <body>
   <h1>Titel</h1>
