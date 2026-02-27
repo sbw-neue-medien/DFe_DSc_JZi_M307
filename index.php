@@ -13,7 +13,7 @@ require_once './config.php';
   <title>Titel</title>
 </head>
 <body>
-  <h1>Titel</h1>
+  <h1>m307</h1>
   
 </body>
 </html>
