@@ -13,7 +13,7 @@ require_once './config.php';
   <title>Modul 307</title>
 </head>
 <body>
-  <h1>m307</h1>
+  <h1>odul307</h1>
   
 </body>
 </html>
