@@ -1,1 +1,10 @@
-/config.php
+.env
+# Docker volumes and images
+db_data/
+
+# PHPStorm/IDE files
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store

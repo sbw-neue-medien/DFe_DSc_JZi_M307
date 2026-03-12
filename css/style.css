@@ -1,0 +1,510 @@
+/* Hauptstylesheet fuer M307 Projektmanagement
+   Autorin: DFe
+   Alle Styles zentral in dieser Datei */
+
+/* ============================
+   Grundlegende Einstellungen
+   ============================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --gruen-hell:    #b7f5c8;
+    --gruen-mittel:  #90ee90;
+    --gruen-dunkel:  #2db84b;
+    --gruen-button:  #22a83d;
+    --hintergrund:   #f5f5f5;
+    --text-dunkel:   #1a1a1a;
+    --text-grau:     #555555;
+    --weiss:         #ffffff;
+    --rand:          #c0c0c0;
+    --schatten:      rgba(0, 0, 0, 0.08);
+    --rot-fehler:    #e74c3c;
+    --rot-hell:      #fdecea;
+    --radius-gross:  24px;
+    --radius-klein:  12px;
+    --radius-input:  50px;
+    --schrift:       'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    font-family: var(--schrift);
+    background-color: var(--hintergrund);
+    color: var(--text-dunkel);
+    min-height: 100vh;
+}
+
+a {
+    color: var(--gruen-dunkel);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ============================
+   Navigation / Header
+   ============================ */
+.header {
+    background-color: var(--gruen-hell);
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+.header .benutzername {
+    font-weight: 500;
+    color: var(--text-dunkel);
+}
+
+/* ============================
+   Buttons
+   ============================ */
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: var(--radius-input);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s;
+    text-align: center;
+}
+
+.btn:hover {
+    opacity: 0.88;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--gruen-button);
+    color: var(--weiss);
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 1.05rem;
+}
+
+.btn-bearbeiten {
+    background-color: var(--gruen-dunkel);
+    color: var(--weiss);
+    padding: 8px 18px;
+    font-size: 0.9rem;
+}
+
+.btn-loeschen {
+    background-color: var(--weiss);
+    color: var(--text-dunkel);
+    border: 2px solid var(--text-dunkel);
+    padding: 8px 18px;
+    font-size: 0.9rem;
+}
+
+.btn-logout {
+    background-color: var(--gruen-dunkel);
+    color: var(--weiss);
+    padding: 8px 20px;
+}
+
+.btn-neu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--text-dunkel);
+    line-height: 1;
+}
+
+/* ============================
+   Formular-Karten (Login, Registrieren usw.)
+   ============================ */
+.karte-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px 16px;
+}
+
+.karte {
+    background-color: var(--gruen-hell);
+    border-radius: var(--radius-gross);
+    padding: 40px 48px;
+    width: 100%;
+    max-width: 520px;
+}
+
+.karte h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+/* ============================
+   Formular-Elemente
+   ============================ */
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+}
+
+legend {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--text-dunkel);
+    padding: 0;
+}
+
+.formular-gruppe {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--text-dunkel);
+}
+
+/* Label innerhalb von Input-Zeilen ausblenden (Placeholder sichtbar) */
+label.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="tel"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid var(--text-dunkel);
+    border-radius: var(--radius-input);
+    font-size: 1rem;
+    font-family: var(--schrift);
+    background-color: var(--gruen-hell);
+    color: var(--text-dunkel);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+textarea {
+    border-radius: var(--radius-klein);
+    resize: vertical;
+    min-height: 80px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--gruen-dunkel);
+}
+
+input.fehler,
+textarea.fehler,
+select.fehler {
+    border-color: var(--rot-fehler);
+    background-color: var(--rot-hell);
+}
+
+.fehler-text {
+    color: var(--rot-fehler);
+    font-size: 0.82rem;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Radio und Checkbox Gruppe */
+.radio-gruppe,
+.checkbox-gruppe {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: var(--gruen-hell);
+    border: 2px solid var(--text-dunkel);
+    border-radius: var(--radius-input);
+    padding: 10px 20px;
+}
+
+.radio-gruppe label,
+.checkbox-gruppe label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin: 0;
+    cursor: pointer;
+}
+
+.radio-gruppe-titel,
+.checkbox-gruppe-titel {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    width: auto;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    accent-color: var(--gruen-dunkel);
+}
+
+.formular-link {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: var(--text-dunkel);
+}
+
+/* ============================
+   Alert / Rueckmeldung
+   ============================ */
+.alert {
+    padding: 12px 18px;
+    border-radius: var(--radius-klein);
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: var(--rot-hell);
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* ============================
+   Hauptbereich / Projektübersicht
+   ============================ */
+.hauptbereich {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+
+.seitentitel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.seitentitel h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+}
+
+/* Projektkarten Grid */
+.projekte-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 24px;
+}
+
+.projekt-karte {
+    background-color: var(--gruen-hell);
+    border-radius: var(--radius-gross);
+    padding: 24px;
+}
+
+.projekt-karte h2 {
+    font-size: 1.15rem;
+    font-weight: 900;
+    margin-bottom: 16px;
+}
+
+.projekt-karte-inhalt {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.projekt-bild-platzhalter {
+    width: 80px;
+    height: 70px;
+    background-color: var(--rand);
+    border-radius: var(--radius-klein);
+    flex-shrink: 0;
+}
+
+.projekt-meta {
+    font-size: 0.9rem;
+    color: var(--text-dunkel);
+    line-height: 1.8;
+}
+
+.projekt-aktionen {
+    display: flex;
+    gap: 10px;
+}
+
+/* Aufgabentabelle */
+.tabelle-wrapper {
+    overflow-x: auto;
+    margin-top: 16px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--weiss);
+    border-radius: var(--radius-klein);
+    overflow: hidden;
+}
+
+thead {
+    background-color: var(--gruen-dunkel);
+    color: var(--weiss);
+}
+
+th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+th a {
+    color: var(--weiss);
+    text-decoration: none;
+}
+
+th a:hover {
+    text-decoration: underline;
+}
+
+td {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: #f0faf3;
+}
+
+/* Filterbereich */
+.filter-bereich {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    background-color: var(--gruen-hell);
+    padding: 16px 20px;
+    border-radius: var(--radius-klein);
+}
+
+.filter-bereich label {
+    margin-bottom: 4px;
+}
+
+.filter-bereich select,
+.filter-bereich input {
+    width: auto;
+    min-width: 150px;
+}
+
+/* ============================
+   Modal / Overlay
+   ============================ */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.aktiv {
+    display: flex;
+}
+
+.modal {
+    background-color: var(--gruen-hell);
+    border-radius: var(--radius-gross);
+    padding: 40px 48px;
+    width: 100%;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal h2 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+/* ============================
+   Responsive Anpassungen
+   ============================ */
+@media (max-width: 600px) {
+    .karte {
+        padding: 28px 20px;
+    }
+
+    .projekte-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal {
+        padding: 28px 20px;
+        margin: 16px;
+    }
+
+    .filter-bereich {
+        flex-direction: column;
+    }
+}

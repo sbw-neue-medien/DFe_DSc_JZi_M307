@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"            # Webserver verfügbar unter localhost:8080
+    volumes:
+      - .:/var/www/html       # Quellcode im Container
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: example
+      DB_NAME: m307_projektmanagement
+      DB_PORT: 3306
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: m307_projektmanagement
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
