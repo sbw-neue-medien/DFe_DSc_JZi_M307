@@ -3,7 +3,7 @@
 // Alle anderen Dateien binden diese Datei ein um auf die DB zuzugreifen
 // Für Docker-Deployments werden die Werte aus Umgebungsvariablen geladen,
 // es gibt aber sensible Standardwerte, damit der Code auch lokal weiter
-downtime laufen kann.
+
 
 // Die Variablen können in einer `.env`-Datei oder via docker-compose gesetzt werden.
 define('DB_HOST', getenv('DB_HOST') ?: 'localhost');

@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Docker Compose
+        run: docker-compose up -d --build
+
+      - name: PHP Lint
+        run: docker run --rm -v ${{ github.workspace }}:/app -w /app php:8.1-cli find . -name "*.php" -exec php -l {} \;
+
+      - name: Tear down
+        run: docker-compose down
