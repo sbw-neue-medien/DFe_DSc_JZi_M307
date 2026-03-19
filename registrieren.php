@@ -5,7 +5,7 @@
 require_once __DIR__ . '/includes/auth.php';
 
 if (istAngemeldet()) {
-    header('Location: /m307/index.php');
+    header('Location: /index.php');
     exit;
 }
 
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
             anmelden($neuerBenutzer);
             flashSetzen('erfolg', 'Willkommen ' . $eingaben['benutzername'] . '! Dein Konto wurde erstellt.');
-            header('Location: /m307/index.php');
+            header('Location: /index.php');
             exit;
         }
     }
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrieren</title>
-    <link rel="stylesheet" href="/m307/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <div class="karte-wrapper">
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="alert alert-danger"><?= htmlspecialchars($fehler['allgemein']) ?></div>
             <?php endif; ?>
 
-            <form id="registrieren-formular" method="POST" action="/m307/registrieren.php" novalidate>
+            <form id="registrieren-formular" method="POST" action="/registrieren.php" novalidate>
                 <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
 
                 <fieldset>
@@ -164,9 +164,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn btn-primary">Registrieren</button>
             </form>
 
-            <p class="formular-link"><a href="/m307/login.php">Anmelden</a></p>
+            <p class="formular-link"><a href="/login.php">Anmelden</a></p>
         </div>
     </div>
-    <script src="/m307/js/validierung.js"></script>
+    <script src="/js/validierung.js"></script>
 </body>
 </html>

@@ -3,16 +3,26 @@
 // Autor: DSc
 
 require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/db.php';
 requireLogin();
-
+?>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Projekt erstellen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/validierung.js"></script>
+</head>
+<body>
+<?php
 // Nur POST-Anfragen erlaubt
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /m307/index.php');
+    header('Location: /index.php');
     exit;
 }
 
 csrfPruefen();
-require_once __DIR__ . '/includes/db.php';
 
 $benutzer = aktuellerBenutzer();
 $pdo      = getDbConnection();
@@ -37,7 +47,7 @@ if (!empty($fehler)) {
     foreach ($fehler as $f) {
         flashSetzen('fehler', $f);
     }
-    header('Location: /m307/index.php');
+    header('Location: /index.php');
     exit;
 }
 
@@ -74,5 +84,8 @@ foreach ($zugewiesen as $benutzerId) {
 
 // PRG Pattern: nach dem Speichern weiterleiten
 flashSetzen('erfolg', 'Projekt "' . $name . '" wurde erfolgreich erstellt.');
-header('Location: /m307/index.php');
+header('Location: /index.php');
 exit;
+?>
+</body>
+</html>

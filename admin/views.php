@@ -2,9 +2,9 @@
 // Admin-Seite: SQL Queries und Datenbankansichten
 // Autor: DSc
 
-require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/db.php';
 requireLogin();
-require_once __DIR__ . '/includes/db.php';
 
 $pdo = getDbConnection();
 
@@ -20,12 +20,13 @@ $benutzer = aktuellerBenutzer();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - SQL Übersicht</title>
-    <link rel="stylesheet" href="/m307/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/validierung.js"></script>
 </head>
 <body>
     <header class="header">
         <span class="benutzername"><?= htmlspecialchars($benutzer['benutzername']) ?></span>
-        <a href="/m307/index.php" class="btn btn-logout">Zurück</a>
+        <a href="index.php" class="btn btn-logout">Zurück</a>
     </header>
 
     <main class="hauptbereich">

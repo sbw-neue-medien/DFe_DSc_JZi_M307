@@ -4,13 +4,13 @@
 // Filtering und Sortierung: DSc
 
 require_once __DIR__ . '/includes/auth.php';
-requireLogin();
 require_once __DIR__ . '/includes/db.php';
+requireLogin();
 
 $benutzer = aktuellerBenutzer();
 $pdo      = getDbConnection();
 
-// Sortierung und Filterung auslesen (DSc: BE Filtering und Sortierung)
+// Sortierung und Filterung auslesen 
 $erlaubteSortierungen = ['name', 'abgabedatum', 'erstellt_am'];
 $sortierung = in_array($_GET['sort'] ?? '', $erlaubteSortierungen)
     ? $_GET['sort']
@@ -54,16 +54,16 @@ $benutzerListe = $pdo->query('SELECT id, benutzername FROM benutzer ORDER BY ben
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projektübersicht</title>
-    <link rel="stylesheet" href="/m307/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/validierung.js"></script>
 </head>
 <body>
 
     <!-- Navigation -->
     <header class="header">
         <span class="benutzername"><?= htmlspecialchars($benutzer['benutzername']) ?></span>
-        <a href="/m307/logout.php" class="btn btn-logout">Logout</a>
+        <a href="logout.php" class="btn btn-logout">Logout</a>
     </header>
 
     <main class="hauptbereich">
@@ -76,7 +76,7 @@ $benutzerListe = $pdo->query('SELECT id, benutzername FROM benutzer ORDER BY ben
         </div>
 
         <!-- Filterbereich (DSc: BE Filtering) -->
-        <form method="GET" action="/m307/index.php" class="filter-bereich">
+        <form method="GET" action="index.php" class="filter-bereich">
             <div class="formular-gruppe">
                 <label for="filter_name">Projektname</label>
                 <input type="text" id="filter_name" name="filter_name" placeholder="Suchen..." value="<?= htmlspecialchars($filterName) ?>">
@@ -124,7 +124,7 @@ $benutzerListe = $pdo->query('SELECT id, benutzername FROM benutzer ORDER BY ben
                                 data-modal-oeffnen="modal-projekt-bearbeiten-<?= (int) $projekt['id'] ?>"
                             >bearbeiten</button>
                             <a
-                                href="/m307/projekt-loeschen.php?id=<?= (int) $projekt['id'] ?>&csrf_token=<?= csrfToken() ?>"
+                                href="/projekt-loeschen.php?id=<?= (int) $projekt['id'] ?>&csrf_token=<?= csrfToken() ?>"
                                 class="btn btn-loeschen loeschen-btn"
                             >löschen</a>
                         </div>
@@ -147,7 +147,7 @@ $benutzerListe = $pdo->query('SELECT id, benutzername FROM benutzer ORDER BY ben
                             $projektAufgaben = $aufgabenProjekt->fetchAll();
                             ?>
                             <?php foreach ($projektAufgaben as $aufgabe): ?>
-                                <form method="POST" action="/m307/aufgabe-bearbeiten.php" id="aufgabe-formular" novalidate>
+                                <form method="POST" action="aufgabe-bearbeiten.php" id="aufgabe-formular" novalidate>
                                     <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
                                     <input type="hidden" name="aufgabe_id" value="<?= (int) $aufgabe['id'] ?>">
                                     <input type="hidden" name="projekt_id" value="<?= (int) $projekt['id'] ?>">
@@ -243,7 +243,7 @@ $benutzerListe = $pdo->query('SELECT id, benutzername FROM benutzer ORDER BY ben
             </div>
 
             <div class="filter-bereich">
-                <form method="GET" action="/m307/index.php" style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; width:100%;">
+                <form method="GET" action="/index.php" style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; width:100%;">
                     <?php if (!empty($filterName)): ?>
                         <input type="hidden" name="filter_name" value="<?= htmlspecialchars($filterName) ?>">
                     <?php endif; ?>
@@ -284,7 +284,7 @@ $benutzerListe = $pdo->query('SELECT id, benutzername FROM benutzer ORDER BY ben
                                     <td><?= htmlspecialchars($aufgabe['projekt_name']) ?></td>
                                     <td><?= htmlspecialchars($aufgabe['zugewiesen_an'] ?? '—') ?></td>
                                     <td>
-                                        <a href="/m307/aufgabe-loeschen.php?id=<?= (int) $aufgabe['id'] ?>&csrf_token=<?= csrfToken() ?>"
+                                        <a href="/aufgabe-loeschen.php?id=<?= (int) $aufgabe['id'] ?>&csrf_token=<?= csrfToken() ?>"
                                            class="btn btn-loeschen loeschen-btn" style="font-size:0.8rem; padding:4px 12px;">
                                            löschen
                                         </a>
@@ -302,7 +302,7 @@ $benutzerListe = $pdo->query('SELECT id, benutzername FROM benutzer ORDER BY ben
     <div class="modal-overlay" id="modal-projekt-neu">
         <div class="modal">
             <h2>Projekt erstellen</h2>
-            <form id="projekt-formular" method="POST" action="/m307/projekt-erstellen.php" novalidate>
+            <form id="projekt-formular" method="POST" action="/projekt-erstellen.php" novalidate>
                 <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
 
                 <fieldset>
@@ -344,6 +344,5 @@ $benutzerListe = $pdo->query('SELECT id, benutzername FROM benutzer ORDER BY ben
         </div>
     </div>
 
-    <script src="/m307/js/validierung.js"></script>
 </body>
 </html>

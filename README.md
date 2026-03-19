@@ -109,7 +109,7 @@ Der Datenbankinhalt bleibt in einem Docker‑Volume (`db_data`) erhalten.
 ## Ordnerstruktur
 
 ```
-m307/
+
 ├── includes/
 │   ├── auth.php        – Session, CSRF, Flash-Nachrichten
 │   └── db.php          – Datenbankverbindung (zentral)

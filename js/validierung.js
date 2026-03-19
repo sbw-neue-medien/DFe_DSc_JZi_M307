@@ -93,7 +93,7 @@ function registrierenValidieren(formular) {
     [emailInput, benutzerInput, passwortInput, bestaetigInput].forEach(fehlerEntfernen);
 
     if (!istGueltigeEmail(emailInput.value)) {
-        fehlerAnzeigen(emailInput, 'Bitte eine gueltige E-Mail Adresse eingeben.');
+        fehlerAnzeigen(emailInput, 'Bitte eine gültige E-Mail Adresse eingeben.');
         gueltig = false;
     }
 
@@ -108,7 +108,7 @@ function registrierenValidieren(formular) {
     }
 
     if (passwortInput.value !== bestaetigInput.value) {
-        fehlerAnzeigen(bestaetigInput, 'Passwoerter stimmen nicht ueberein.');
+        fehlerAnzeigen(bestaetigInput, 'Passwörter stimmen nicht überein.');
         gueltig = false;
     }
 

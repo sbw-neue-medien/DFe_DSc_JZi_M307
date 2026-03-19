@@ -3,15 +3,25 @@
 // Autor: JZi
 
 require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/db.php';
 requireLogin();
-
+?>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Aufgabe bearbeiten</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/validierung.js"></script>
+</head>
+<body>
+<?php
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /m307/index.php');
+    header('Location: /index.php');
     exit;
 }
 
 csrfPruefen();
-require_once __DIR__ . '/includes/db.php';
 
 $pdo       = getDbConnection();
 $aufgabeId = (int) ($_POST['aufgabe_id'] ?? 0);
@@ -19,7 +29,7 @@ $projektId = (int) ($_POST['projekt_id'] ?? 0);
 
 if ($aufgabeId <= 0) {
     flashSetzen('fehler', 'Ungueltige Aufgaben-ID.');
-    header('Location: /m307/index.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -37,14 +47,14 @@ if (empty($titel)) {
 }
 
 if (empty($abgabedatum) || !strtotime($abgabedatum)) {
-    $fehler[] = 'Abgabedatum ist ungueltig.';
+    $fehler[] = 'Abgabedatum ist ungültig.';
 }
 
 if (!empty($fehler)) {
     foreach ($fehler as $f) {
         flashSetzen('fehler', $f);
     }
-    header('Location: /m307/index.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -78,5 +88,8 @@ $stmt->execute([
 
 flashSetzen('erfolg', 'Aufgabe wurde erfolgreich aktualisiert.');
 // PRG Pattern Weiterleitung
-header('Location: /m307/index.php');
+header('Location: index.php');
 exit;
+?>
+</body>
+</html>

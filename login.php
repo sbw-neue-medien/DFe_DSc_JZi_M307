@@ -3,10 +3,11 @@
 // Autorin: DFe
 
 require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/db.php';
 
 // Wenn bereits angemeldet dann direkt weiterleiten
 if (istAngemeldet()) {
-    header('Location: /m307/index.php');
+    header('Location: index.php');
     exit;
 }
 
@@ -14,8 +15,6 @@ $fehler = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrfPruefen();
-
-    require_once __DIR__ . '/includes/db.php';
 
     $eingabe = trim($_POST['benutzer'] ?? '');
     $passwort = $_POST['passwort'] ?? '';
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($benutzer && password_verify($passwort, $benutzer['passwort_hash'])) {
             anmelden($benutzer);
             // PRG Pattern: nach Login weiterleiten
-            header('Location: /m307/index.php');
+            header('Location: /index.php');
             exit;
         } else {
             $fehler['allgemein'] = 'Benutzername oder Passwort ist falsch.';
@@ -51,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anmeldung</title>
-    <link rel="stylesheet" href="/m307/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/validierung.js"></script>
 </head>
 <body>
     <div class="karte-wrapper">
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="alert alert-danger"><?= htmlspecialchars($fehler['allgemein']) ?></div>
             <?php endif; ?>
 
-            <form id="login-formular" method="POST" action="/m307/login.php" novalidate>
+            <form id="login-formular" method="POST" action="/login.php" novalidate>
                 <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
 
                 <fieldset>
@@ -112,10 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
 
-            <p class="formular-link"><a href="/m307/login.php">Passwort vergessen?</a></p>
-            <p class="formular-link"><a href="/m307/registrieren.php">Registrieren</a></p>
+            <p class="formular-link"><a href="login.php">Passwort vergessen?</a></p>
+            <p class="formular-link"><a href="registrieren.php">Registrieren</a></p>
         </div>
     </div>
-    <script src="/m307/js/validierung.js"></script>
 </body>
 </html>

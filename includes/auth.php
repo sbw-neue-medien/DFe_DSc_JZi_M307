@@ -9,7 +9,7 @@ function istAngemeldet(): bool {
 
 function requireLogin(): void {
     if (!istAngemeldet()) {
-        header('Location: /m307/login.php');
+        header('Location: /login.php');
         exit;
     }
 }

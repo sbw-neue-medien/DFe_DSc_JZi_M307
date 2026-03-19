@@ -3,8 +3,19 @@
 // Autor: JZi
 
 require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/db.php';
 requireLogin();
-
+?>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Aufgabe löschen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/validierung.js"></script>
+</head>
+<body>
+<?php
 $aufgabeId = (int) ($_GET['id'] ?? 0);
 $csrfToken = $_GET['csrf_token'] ?? '';
 
@@ -16,16 +27,17 @@ if (!hash_equals($_SESSION['csrf_token'] ?? '', $csrfToken)) {
 
 if ($aufgabeId <= 0) {
     flashSetzen('fehler', 'Ungueltige Aufgaben-ID.');
-    header('Location: /m307/index.php');
+    header('Location: index.php');
     exit;
 }
-
-require_once __DIR__ . '/includes/db.php';
 
 $pdo  = getDbConnection();
 $stmt = $pdo->prepare('DELETE FROM aufgaben WHERE id = :id');
 $stmt->execute(['id' => $aufgabeId]);
 
-flashSetzen('erfolg', 'Aufgabe wurde geloescht.');
-header('Location: /m307/index.php');
+flashSetzen('erfolg', 'Aufgabe wurde gelöscht.');
+header('Location: index.php');
 exit;
+?>
+</body>
+</html>
