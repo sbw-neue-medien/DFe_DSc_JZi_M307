@@ -24,6 +24,7 @@ services:
       MYSQL_DATABASE: m307_projektmanagement
     volumes:
       - db_data:/var/lib/mysql
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
 volumes:
   db_data:
